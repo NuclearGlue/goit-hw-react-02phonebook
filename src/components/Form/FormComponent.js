@@ -10,7 +10,8 @@ class FormComponent extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    const { name, number } = this.state;
+    this.props.onSubmit({ name, number, id: nanoid() });
     this.reset();
   };
 
@@ -25,7 +26,6 @@ class FormComponent extends Component {
     const { name, value } = event.currentTarget;
     this.setState({
       [name]: value,
-      id: nanoid(),
     });
   };
 

@@ -22,7 +22,14 @@ function Phonebook({ contacts, onContactDelete }) {
 }
 
 Phonebook.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
+  onContactDelete: PropTypes.func.isRequired,
 };
 
 export default Phonebook;

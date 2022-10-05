@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Form from './Form/FormComponent';
 import Contacts from './Form/Phonebook';
 import Filter from './Form/Filter';
-import { nanoid } from 'nanoid';
 
 
 export class App extends Component {
@@ -16,19 +15,26 @@ export class App extends Component {
     filter: "",
   };
 
-  nameContactId = nanoid();
+  
 
   addContacts = (data) => {
     
     const { contacts } = this.state;
 
     const names = contacts.map((contact) => contact.name);
-
-    names.includes(data.name)
-      ? alert(`${data.name} is already in contact`)
-      : this.setState((prevState) => ({
+    
+    for (let name of names) {
+      if (name.toLocaleLowerCase() === data.name.toLocaleLowerCase()) {
+        alert(`${data.name} is already in contact`)
+        break;
+      }
+      else {
+        this.setState((prevState) => ({
           contacts: [data, ...prevState.contacts],
         }));
+        break;
+      }
+    }
   };
 
   deleteContacts = (contactId) => {
